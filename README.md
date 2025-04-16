@@ -4,6 +4,10 @@
 
 A simple API wrapper/digester for the Open Weather API written using Express web servers.
 
+It will essentially reverse proxy to the open weather api and return the pertinent information.
+
+the endpoint will be `/weather/condition` with query parameters `lat` and `lon` for fetching the data.
+
 ## Development Tools
 
 I primarily used the bun run time for development. Tests are written in Jest compared to bun's testing framework.
@@ -30,6 +34,13 @@ To run the full test suite use:
 `pnpm test`
 `yarn test`
 `npm test`
+
+## TODO
+
+A single endpoint that retuns:
+- [ ] the weather condition is outside in that area (snow, rain,etc) 
+- [ ] whether it’s hot, cold, or moderate outside, we're using Fahrenheit, so <= 50 is cold, >= 87 is hot, and moderate is inbetween.
+- [ ] whether there are any weather alerts going on in that area and what is going on if there is currently an active alert.
 
 ## Purpose
 
