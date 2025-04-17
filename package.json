@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "test:unit": "jest --config jest.unit.ts",
-    "test:e2e": "jest --config jest.e2e.ts"
+    "test:unit": "jest --selectProjects UNIT",
+    "test:e2e": "jest --selectProjects E2E"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
