@@ -35,10 +35,22 @@ npm test
 
 ## TODO
 
-A single endpoint that retuns:
+### Open Weather Client
 - [x] the weather condition is outside in that area (snow, rain,etc) 
 - [x] whether it’s hot, cold, or moderate outside, we're using Fahrenheit, so <= 55 is cold, >= 85 is hot, and moderate is inbetween.
 - [x] whether there are any weather alerts going on in that area and what is going on if there is currently an active alert.
+
+### Web Server
+- [ ] API endpoint that accepts `lat` and `lon` and returns info
+
+### Tests
+
+#### Unit
+- [x] Open Weather Client and Utils
+
+#### E2E
+- [ ] `GET /weather` (mocked)
+- [ ] bash script for hitting locally running instance (non-mocked)
 
 ## Purpose
 
