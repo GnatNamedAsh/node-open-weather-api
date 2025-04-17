@@ -1,5 +1,6 @@
 import { describe, it, expect, jest, afterEach, beforeEach } from '@jest/globals'
 import { openWeatherApiCall } from '@/lib/open-weather'
+import { OpenWeatherApiResponse } from '@/lib/open-weather/types'
 
 const { spyOn, restoreAllMocks } = jest
 
@@ -17,48 +18,59 @@ const mockSuccessBody = {
   }
 }
 
-describe('Open Weather API Client', () => {
+describe('Open Weather API', () => {
   let fetchMock: any = undefined
-  const expectedUrl = 'https://api.openweathermap.org/data/3.0/onecall'
-  const mockParams = { lon: '50', lat: '50' }
-
+ 
   beforeEach(() => {
     fetchMock = spyOn(global, 'fetch') 
   })
 
   afterEach(() => { restoreAllMocks() })
 
-  it('should make an api call to the correct endpoint', async () => {
-    const jsonMock = jest.fn(async () => (mockSuccessBody))
-    fetchMock.mockImplementation(() => (Promise.resolve({
-      ok: true,
-      json: jsonMock
-    })))
-    const response = await openWeatherApiCall(mockParams) 
+  describe('API Client', () => {
 
-    expect(response?.current).toBeDefined()
-    expect(fetchMock).toHaveBeenCalledTimes(1)
-    const argUrl = fetchMock.mock.calls[0][0]
-    expect(argUrl.origin + argUrl.pathname).toEqual(expectedUrl)
-    expect(jsonMock).toHaveBeenCalled()
+    const expectedUrl = 'https://api.openweathermap.org/data/3.0/onecall'
+    const mockParams = { lon: '50', lat: '50' }
+
+    it('should make an api call to the correct endpoint', async () => {
+      const jsonMock = jest.fn(async () => (mockSuccessBody))
+      fetchMock.mockImplementation(() => (Promise.resolve({
+        ok: true,
+        json: jsonMock
+      })))
+      const response = await openWeatherApiCall<OpenWeatherApiResponse>(mockParams) 
+
+      expect(response?.current).toBeDefined()
+      expect(fetchMock).toHaveBeenCalledTimes(1)
+      const argUrl = fetchMock.mock.calls[0][0]
+      expect(argUrl.origin + argUrl.pathname).toEqual(expectedUrl)
+      expect(jsonMock).toHaveBeenCalled()
+    })
+
+    it(
+      'should throw an error if response is not okay and include the status code in the error message',
+      async () => {
+        fetchMock.mockImplementation(() => (Promise.resolve({
+          ok: false,
+          status: 401
+        })))
+
+        try {
+          await openWeatherApiCall<OpenWeatherApiResponse>(mockParams)
+
+          throw new Error('Should have thrown an error here')
+        } catch (err: any) {
+          expect(fetchMock).toHaveBeenCalledTimes(1)
+          expect(err?.message).toBeDefined()
+          expect(err.message).toContain("401")
+        }
+      })
   })
 
-  it(
-    'should throw an error if response is not okay and include the status code in the error message',
-    async () => {
-      fetchMock.mockImplementation(() => (Promise.resolve({
-        ok: false,
-        status: 401
-      })))
+  describe('Get Current Weather', () => {
+    it('should return current weather shaped in the way we want', async () => {
 
-      try {
-        await openWeatherApiCall(mockParams)
-
-        throw new Error('Should have thrown an error here')
-      } catch (err: any) {
-        expect(fetchMock).toHaveBeenCalledTimes(1)
-        expect(err?.message).toBeDefined()
-        expect(err.message).toContain("401")
-      }
     })
+  })
 })
+

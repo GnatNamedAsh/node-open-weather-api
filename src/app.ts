@@ -1,4 +1,5 @@
 import express from 'express'
+import config from 'dotenv'
 import { get } from './routes/weather/handlers'
 
 const app = express()
