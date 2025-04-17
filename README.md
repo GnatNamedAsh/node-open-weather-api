@@ -6,13 +6,12 @@ A simple API wrapper/digester for the Open Weather API written using Express web
 
 It will essentially reverse proxy to the open weather api and return the pertinent information.
 
-the endpoint will be `/weather/condition` with query parameters `lat` and `lon` for fetching the data.
+The endpoint will be `/weather` with query/search parameters `lat` and `lon` for fetching the data.
 
 ## Development Tools
 
-I primarily used the bun run time for development. Tests are written in Jest compared to bun's testing framework.
-
-Regardless, the application should be runtime agnostic and work with node, deno, and bun for versatility purposes.
+I primarily used the bun run time. Tests are written in Jest though to not lock in someone to s a specific runtime.
+Regardless, I have a goal that the application should be runtime agnostic and work with node/node-ts, deno, and bun for versatility purposes.
 
 A Dockerfile and a docker compose file will be included if you'd rather run it in a preconfigured container environment.
 
@@ -22,25 +21,24 @@ I've chosen not to use AI and stuck to just using nvim and basic LSP autocomplet
 
 ## Testing
 
-The implementation will include unit tests for utilities with mocked API calls, and integration tests with mocked API calls.
+The implementation will include unit tests for utilities with mocked API calls, and e2e tests with mocked API calls.
 
-I'm also including e2e tests, but since the tests will not used mocked API calls, it isn't included in the full test suite to prevent running up your API key and possibly pushing you passed the free call limit.
-
-Included is a bash script that will also do a form of e2e tests using cURL or httpie (if installed) for the running service.
+I'll also included is a bash script that will do unmocked e2e tests using cURL or httpie (if installed) if you have the server running.
 
 To run the full test suite use:
-
-`bun test`
-`pnpm test`
-`yarn test`
-`npm test`
+```
+bun test
+pnpm test
+yarn test
+npm test
+```
 
 ## TODO
 
 A single endpoint that retuns:
-- [ ] the weather condition is outside in that area (snow, rain,etc) 
-- [ ] whether it’s hot, cold, or moderate outside, we're using Fahrenheit, so <= 50 is cold, >= 87 is hot, and moderate is inbetween.
-- [ ] whether there are any weather alerts going on in that area and what is going on if there is currently an active alert.
+- [x] the weather condition is outside in that area (snow, rain,etc) 
+- [x] whether it’s hot, cold, or moderate outside, we're using Fahrenheit, so <= 55 is cold, >= 85 is hot, and moderate is inbetween.
+- [x] whether there are any weather alerts going on in that area and what is going on if there is currently an active alert.
 
 ## Purpose
 
@@ -48,4 +46,4 @@ This is part of the hiring process as a project.
 
 ## Licensing
 
-This repo uses the MIT license and is free to use.
+This repo uses the MIT licensing.
