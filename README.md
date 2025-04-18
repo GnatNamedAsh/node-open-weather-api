@@ -4,30 +4,30 @@
 
 A simple API wrapper/digester for the Open Weather API written using Express web servers.
 
-It will essentially reverse proxy to the open weather api and return the pertinent information.
+It will essentially reverse proxy to the open weather api and return the pertinent/reshaped information.
 
 The endpoint will be `/weather` with query/search parameters `lat` and `lon` for fetching the data.
 
 ## Development Tools
 
-I primarily used the bun run time. Tests are written in Jest though to not lock in someone to s a specific runtime.
-Regardless, I have a goal that the application should be runtime agnostic and work with node/node-ts, deno, and bun for versatility purposes.
+I primarily use the bun run time. Tests are written in Jest though to not be locked into a specific runtime.
+Regardless, I have a goal that the application should be runtime agnostic and work with node/tsx and bun for versatility purposes.
 
 A Dockerfile and a docker compose file will be included if you'd rather run it in a preconfigured container environment.
 
 This will utilize the `OPEN_WEATHER_API_KEY` env var that should be set by you and should be seen in the `.env.example` file.
 
-I've chosen not to use AI and stuck to just using nvim and basic LSP autocomplete for development.
+Outside of speeding up test writing, I've chosen not to use AI amd primarily stuck to just using nvim and basic LSP autocomplete for development.
 
 ## Testing
 
 The implementation will include unit tests for utilities with mocked API calls, and e2e tests with mocked API calls.
 
-I'll also included is a bash script that will do unmocked e2e tests using cURL or httpie (if installed) if you have the server running.
+I'll also included is a bash script that will do unmocked e2e tests using cURL or httpie (if installed) if you have the server running. Be carefuly though because it will use up your API calls.
 
 To run the full test suite use:
 ```
-bun test
+bun run test
 pnpm test
 yarn test
 npm test
@@ -41,7 +41,7 @@ npm test
 - [x] whether there are any weather alerts going on in that area and what is going on if there is currently an active alert.
 
 ### Web Server
-- [ ] API endpoint that accepts `lat` and `lon` and returns info
+- [x] API endpoint that accepts `lat` and `lon` and returns info
 
 ### Tests
 
@@ -49,8 +49,8 @@ npm test
 - [x] Open Weather Client and Utils
 
 #### E2E
-- [ ] `GET /weather` (mocked)
-- [ ] bash script for hitting locally running instance (non-mocked)
+- [x] `GET /weather` (mocked)
+- [x] bash script for hitting locally running instance (non-mocked)
 
 ## Purpose
 
