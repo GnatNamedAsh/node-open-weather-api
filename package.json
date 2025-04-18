@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "bun build src/app.ts",
+    "dev": "bun --watch src/app.ts",
     "dev:bun": "bun --watch src/app.ts",
     "dev:node": "tsx src/app.ts",
     "test": "jest",
