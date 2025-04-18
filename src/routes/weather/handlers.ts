@@ -1,9 +1,12 @@
 import type { Request, Response } from "express";
-import { getCurrentWeather } from '@/lib/open-weather'
 
 export const get = async (req: Request, res: Response) => {
   try {
-  const weatherResponse = getCurrentWeather()
+  const weatherResponse = {
+    city: 'London',
+    temperature: 20,
+    description: 'sunny'
+  }
 
   res
     .header({
