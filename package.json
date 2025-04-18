@@ -1,12 +1,12 @@
 {
   "name": "node-open-weather-api",
-  "module": "src/app.ts",
+  "module": "src/server/app.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build src/app.ts",
-    "dev": "bun --watch src/app.ts",
-    "dev:bun": "bun --watch src/app.ts",
-    "dev:node": "tsx src/app.ts",
+    "build": "bun build src/server/app.ts",
+    "dev": "bun --watch src/server/app.ts",
+    "dev:bun": "bun --watch src/server/app.ts",
+    "dev:node": "tsx src/server/app.ts",
     "test": "jest",
     "test:unit": "jest --selectProjects UNIT",
     "test:e2e": "jest --selectProjects E2E"

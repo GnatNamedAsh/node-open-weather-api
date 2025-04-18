@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals'
-import { get } from '@/src/routes/weather/handlers'
+import { get } from '@/src/server/routes/weather/handlers'
 import { getCurrentWeather } from '@/src/lib/open-weather'
 import type { Request, Response } from 'express'
 

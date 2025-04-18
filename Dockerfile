@@ -32,4 +32,4 @@ COPY --from=prerelease /usr/src/app/package.json .
 # run
 USER bun
 EXPOSE 3000/tcp
-CMD ["bun", "run", "src/app.ts"]
+CMD ["bun", "run", "src/server/app.ts"]
