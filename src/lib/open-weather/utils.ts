@@ -1,5 +1,21 @@
-import { Weather } from "./types"
-import { DEFAULT_WEATHER_CONDITION } from "./constants"
+import { OpenWeatherCoordinates, Weather } from "./types"
+import { API_KEY, DEFAULT_SEARCH_PARAMS, DEFAULT_WEATHER_CONDITION } from "./constants"
+
+export const createSearchParams = (coord: OpenWeatherCoordinates, useDefault: boolean = true) => {
+  const searchParams = new URLSearchParams()
+  const defaults = useDefault ? DEFAULT_SEARCH_PARAMS : {}
+
+  const params = {
+    ...coord,
+    ...defaults,
+    appid: API_KEY
+  }
+
+  Object.entries(params).map(([key, value]) => searchParams.set(key, value))
+
+  return searchParams
+} 
+
 
 export const getQualitativeTemp = (temp: number): 'hot' | 'cold' | 'moderate' => {
   if (temp <= 55) return 'cold'

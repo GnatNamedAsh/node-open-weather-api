@@ -26,14 +26,6 @@ type OpenWeatherCurrentWeather = {
   wind_deg: number
   wind_gust: number
   weather: Array<Weather> 
-  alerts: {
-    sender_name: string
-    event: string
-    start: number
-    end: number
-    description: string
-    tags: string
-  }[]
 }
 
 // only going to type out the fields we're keeping, so excluded fields won't be typed
@@ -43,6 +35,14 @@ export type OpenWeatherApiResponse = {
   timezone: string
   timezone_offset: number
   current: OpenWeatherCurrentWeather
+  alerts: {
+    sender_name: string
+    event: string
+    start: number
+    end: number
+    description: string
+    tags: string
+  }[]
 }
 
 export type CurrentWeather = {

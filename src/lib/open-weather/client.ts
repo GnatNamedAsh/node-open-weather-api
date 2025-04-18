@@ -1,21 +1,6 @@
 import { API_KEY, METHODS, DEFAULT_SEARCH_PARAMS, API_ENDPOINT, HOST_URL, DEFAULT_WEATHER_CONDITION } from './constants'
 import type { CurrentWeather, OpenWeatherApiResponse, OpenWeatherCoordinates } from './types'
-import { determineWeatherCondition, getQualitativeTemp } from './utils'
-
-const createSearchParams = (coord: OpenWeatherCoordinates, useDefault: boolean = true) => {
-  const searchParams = new URLSearchParams()
-  const defaults = useDefault ? DEFAULT_SEARCH_PARAMS : {}
-
-  const params = {
-    ...coord,
-    ...defaults,
-    appid: API_KEY
-  }
-
-  Object.entries(params).map(([key, value]) => searchParams.set(key, value))
-
-  return searchParams
-} 
+import { determineWeatherCondition, getQualitativeTemp, createSearchParams } from './utils'
 
 // if expanding out to other APIs, create a type union for the params
 export const openWeatherApiCall = async <T>(params: OpenWeatherCoordinates): Promise<T> => {
@@ -34,15 +19,14 @@ export const openWeatherApiCall = async <T>(params: OpenWeatherCoordinates): Pro
   return (await res.json()) as T
 }
 
-// get current weather + reshaping
+
 export const getCurrentWeather = async (params: OpenWeatherCoordinates): Promise<CurrentWeather> => {
-  const { current } = await openWeatherApiCall<OpenWeatherApiResponse>(params)
-  
+  const { current, alerts } = await openWeatherApiCall<OpenWeatherApiResponse>(params)
+
   // reshape for what we care about
   const currentWeather = current.weather?.[0]
   const condition = currentWeather ? determineWeatherCondition(currentWeather) : DEFAULT_WEATHER_CONDITION
-  
-  const alerts = current.alerts.map( alert => ({
+  const reshapedAlerts = alerts?.map( alert => ({
     title: alert.event,
     description: alert.description
   }))
@@ -55,7 +39,7 @@ export const getCurrentWeather = async (params: OpenWeatherCoordinates): Promise
    
   return {
     condition,
-    alerts,
+    alerts: reshapedAlerts,
     temp
   }
 }

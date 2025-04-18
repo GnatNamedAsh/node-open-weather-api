@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "bun build src/app.ts",
-    "dev": "bun --watch src/app.ts",
+    "dev:bun": "bun --watch src/app.ts",
+    "dev:node": "tsx src/app.ts",
     "test": "jest",
     "test:unit": "jest --selectProjects UNIT",
     "test:e2e": "jest --selectProjects E2E"
@@ -14,9 +15,12 @@
     "@types/bun": "latest",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
+    "@types/supertest": "^6.0.3",
     "jest": "^29.7.0",
+    "supertest": "^7.1.0",
     "ts-jest": "^29.3.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3"
   },
   "peerDependencies": {
     "typescript": "^5"
